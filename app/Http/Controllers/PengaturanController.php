@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Slider;
 use App\Models\Informasi;
 use App\Models\User;
+use App\Models\Kegiatan;
+use App\Models\Perusahaan;
+use App\Models\Bidangcsr;
 
 
 class PengaturanController extends Controller
@@ -18,6 +21,43 @@ class PengaturanController extends Controller
     {
         return view('pengaturan');
     }
+
+    public function kegiatan()
+    {
+        if(\Auth::user()->role == "superadmin"){
+            $datas = Kegiatan::
+                join('perusahaan','kegiatan.idperusahaan','=','perusahaan.id')
+                ->join('bidangcsr','kegiatan.idbidang','=','bidangcsr.id')
+                ->select('kegiatan.*','perusahaan.nama as namaPerusahaan','bidangcsr.nama as namaBidang')
+                ->get();
+
+            return view('resume.kegiatan', compact('datas'));
+
+        } else if(\Auth::user()->role == "perusahaan"){
+            $datas = Kegiatan::
+                join('perusahaan','kegiatan.idperusahaan','=','perusahaan.id')
+                ->join('bidangcsr','kegiatan.idbidang','=','bidangcsr.id')
+                ->select('kegiatan.*','perusahaan.nama as namaPerusahaan','bidangcsr.nama as namaBidang')
+                ->where('idperusahaan','=',\Auth::user()->id)->get();
+
+            return view('resume.kegiatan', compact('datas'));
+        }
+    }
+
+    public function perusahaan()
+    {
+        $datas = Perusahaan::where('status','=','diterima')->get();
+
+        return view('resume.perusahaan', compact('datas'));
+    }
+
+    public function bidang()
+    {
+        $datas = Bidangcsr::get();
+
+        return view('resume.bidang', compact('datas'));
+    }
+
 
     public function pengaturan(Request $request, $id)
     {

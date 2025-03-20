@@ -28,6 +28,9 @@ Route::resource('registrasi', RegistrasiController::class)->middleware('checkRol
 Route::resource('kegiatan', KegiatanController::class)->middleware('checkRole:superadmin,perusahaan');
 Route::resource('bidang-csr', BidangCsrController::class)->middleware('checkRole:superadmin,perusahaan');
 Route::resource('resume', ResumeController::class)->middleware(['checkRole:superadmin,perusahaan']);
+Route::get('resume-keg', [PengaturanController::class, 'kegiatan'])->middleware(['checkRole:superadmin,perusahaan']);
+Route::get('resume-per', [PengaturanController::class, 'perusahaan'])->middleware(['checkRole:superadmin,perusahaan']);
+Route::get('resume-bid', [PengaturanController::class, 'bidang'])->middleware(['checkRole:superadmin,perusahaan']);
 Route::get('pengaturan', [PengaturanController::class, 'index'])->middleware(['checkRole:superadmin,perusahaan']);
 Route::get('pengaturan/{slug}', [PengaturanController::class, 'pengaturan'])->middleware(['checkRole:superadmin,perusahaan']);
 Route::any('pengaturan/{jenis}/update', [PengaturanController::class, 'ubah'])->name('pengaturanUpdate')->middleware(['checkRole:superadmin,perusahaan']);
