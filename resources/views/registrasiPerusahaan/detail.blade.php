@@ -10,7 +10,7 @@
                     <section class="container px-4 mx-auto">
                         <div class="w-full flex justify-between mt-6">
                             <div>
-                                <h2 class="text-lg font-medium text-gray-800 dark:text-white flex items-center">
+                                <h2 class="text-lg font-medium text-gray-800  flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.2" stroke="currentColor" class="w-8 h-8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -26,7 +26,7 @@
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block w-full py-2  md:px-6 lg:px-8">
                                     <div
-                                        class="overflow-hidden w-full border border-gray-300 p-3 dark:border-gray-700 md:rounded-lg">
+                                        class="overflow-hidden w-full border border-gray-300 p-3  md:rounded-lg">
 
                                         <form action="{{ route('registrasi.update', $data->id) }}" method="POST"
                                             enctype="multipart/form-data" class="text-base font-normal w-full ">
@@ -37,107 +37,107 @@
                                             <div class="grid grid-cols-2 gap-x-6 w-full">
 
                                                 <div class="mb-4">
-                                                    <label for="nama" class="block mb-2 dark:text-white">Nama
+                                                    <label for="nama" class="block mb-2 ">Nama
                                                         Perusahaan</label>
                                                     <input id="nama" name="nama" disabled
                                                         value="{{ $data->nama }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
-                                                    <label for="nama" class="block mb-2 dark:text-white">Nama
+                                                    <label for="nama" class="block mb-2 ">Nama
                                                         Direktur</label>
                                                     <input id="direktur" name="direktur" disabled
                                                         value="{{ $data->direktur }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
                                                     <label for="kecamatan"
-                                                        class="block mb-2 dark:text-white capitalize">kecamatan</label>
+                                                        class="block mb-2  capitalize">kecamatan</label>
                                                     <input id="kecamatan" name="kecamatan" disabled
                                                         value="{{ $data->kecamatan }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
                                                     <label for="kelurahan"
-                                                        class="block mb-2 dark:text-white capitalize">kelurahan</label>
+                                                        class="block mb-2  capitalize">kelurahan</label>
                                                     <input id="kelurahan" name="kelurahan" disabled
                                                         value="{{ $data->kelurahan }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
                                                     <label for="alamat"
-                                                        class="block mb-2 dark:text-white capitalize">alamat</label>
+                                                        class="block mb-2  capitalize">alamat</label>
                                                     <input id="alamat" name="alamat" disabled
                                                         value="{{ $data->alamat }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
-                                                    <label for="kodepos" class="block mb-2 dark:text-white capitalize">kode
+                                                    <label for="kodepos" class="block mb-2  capitalize">kode
                                                         pos</label>
                                                     <input id="kodepos" name="kodepos" disabled
                                                         value="{{ $data->kodepos }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
                                                     <label for="website"
-                                                        class="block mb-2 dark:text-white capitalize">website</label>
+                                                        class="block mb-2  capitalize">website</label>
                                                     <input id="website" name="website" disabled
                                                         value="{{ $data->website }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
-                                                    <label for="nomorhp" class="block mb-2 dark:text-white capitalize">no
+                                                    <label for="nomorhp" class="block mb-2  capitalize">no
                                                         hp</label>
                                                     <input id="nomorhp" name="nomorhp" disabled
                                                         value="{{ $data->nomorhp }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
                                                     <label for="email"
-                                                        class="block mb-2 dark:text-white capitalize">email</label>
+                                                        class="block mb-2  capitalize">email</label>
                                                     <input id="email" name="email" disabled
                                                         value="{{ $data->email }}"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
                                                     <label for="password"
-                                                        class="block mb-2 dark:text-white capitalize">Status</label>
+                                                        class="block mb-2  capitalize">Status</label>
                                                     <label>
                                                         <select id="status" name="status"
-                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      ">
                                                             <option value="diterima">Diterima</option>
                                                             <option value="dikembalikan">Dikembalikan</option>
                                                         </select>
                                                 </div>
                                                 {{-- <div class="mb-4">
                                                         <label for="password"
-                                                            class="block mb-2  dark:text-white">Urutan</label>
+                                                            class="block mb-2  ">Urutan</label>
                                                         <input type="number" id="urutan" name="urutan"
-                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                             required />
                                                     </div> --}}
 
                                             </div>
                                             <button type="submit"
-                                                class="text-white bg-[#00ae73] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg w-full  px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-[#00ae73] dark:focus:ring-green-800">SIMPAN</button>
+                                                class="text-white bg-[#1E40AF] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg w-full  px-5 py-2.5 text-center   ">SIMPAN</button>
                                         </form>
 
 

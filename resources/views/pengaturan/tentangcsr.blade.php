@@ -10,7 +10,7 @@
                     <section class="container px-4 mx-auto">
                         <div class="w-full flex justify-between mt-6">
                             <div class="">
-                                <h2 class="text-lg font-medium text-gray-800 dark:text-white flex items-center">
+                                <h2 class="text-lg font-medium text-gray-800  flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.2" stroke="currentColor" class="w-8 h-8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -25,7 +25,7 @@
                             <a href="{{ route('kegiatan.create') }}"
                                 class="{{ \Auth::user()->role == 'perusahaan' ? '' : ' hidden' }}">
                                 <button
-                                    class="px-3 py-2 font-black tracking-wide text-sm text-white capitalize transition-colors duration-300 transform bg-[#00ae73] rounded-lg hover:bg-green-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 flex gap-3">
+                                    class="px-3 py-2 font-black tracking-wide text-sm text-white capitalize transition-colors duration-300 transform bg-[#1E40AF] rounded-lg hover:bg-green-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 flex gap-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -40,7 +40,7 @@
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block w-full py-2 align-middle md:px-6 lg:px-8">
                                     <div
-                                        class="overflow-hidden w-full p-6 border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                        class="overflow-hidden w-full p-6 border border-gray-200  md:rounded-lg">
                                         <form
                                             action="{{ route('pengaturanUpdate', last(request()->segments()), $data->id) }}"
                                             method="POST" enctype="multipart/form-data"
@@ -53,17 +53,17 @@
                                                 <input type="text" class="hidden" id="id" name="id"
                                                     value="{{ $data->id }}">
                                                 <div class="mb-4">
-                                                    <label for="nama" class="block mb-2 dark:text-white">Tentang
+                                                    <label for="nama" class="block mb-2 ">Tentang
                                                         CSR</label>
                                                     <textarea id="deskripsi" name="deskripsi" rows="5"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required>{{ $data->deskripsi }} </textarea>
                                                 </div>
 
 
                                             </div>
                                             <button type="submit"
-                                                class="text-white bg-[#00ae73] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg w-full  px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-[#00ae73] dark:focus:ring-green-800">SIMPAN</button>
+                                                class="text-white bg-[#1E40AF] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-lg w-full  px-5 py-2.5 text-center   ">SIMPAN</button>
                                         </form>
                                     </div>
                                 </div>

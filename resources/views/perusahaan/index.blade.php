@@ -10,7 +10,7 @@
                     <section class="container px-4 mx-auto">
                         <div class="w-full flex justify-between mt-6">
                             <div>
-                                <h2 class="text-lg font-medium text-gray-800 dark:text-white flex items-center">
+                                <h2 class="text-lg font-medium text-gray-800  flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.2" stroke="currentColor" class="w-8 h-8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -23,7 +23,7 @@
                             <a href="{{ route('perusahaan.create') }}">
 
                                 <button
-                                    class="px-3 py-2 font-black tracking-wide text-sm text-white capitalize transition-colors duration-300 transform bg-[#00ae73] rounded-lg hover:bg-green-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 flex gap-3">
+                                    class="px-3 py-2 font-black tracking-wide text-sm text-white capitalize transition-colors duration-300 transform bg-[#1E40AF] rounded-lg hover:bg-green-900 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 flex gap-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -38,10 +38,10 @@
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block w-full py-2 align-middle md:px-6 lg:px-8">
                                     <div
-                                        class="overflow-hidden w-full border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                                        class="overflow-hidden w-full border border-gray-200  md:rounded-lg">
 
-                                        <table class="w-full divide-y divide-gray-200 dark:divide-gray-700">
-                                            <thead class="text-white bg-[#00ae73]">
+                                        <table class="w-full divide-y divide-gray-200 ">
+                                            <thead class="text-white bg-[#1E40AF]">
                                                 <tr>
                                                     <th scope="col"
                                                         class="px-12 py-3.5 text-sm font-bold uppercase text-center rtl:text-right">
@@ -72,12 +72,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody
-                                                class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                                class="bg-white divide-y divide-gray-200  ">
                                                 @forelse($datas as $data)
                                                     <tr>
                                                         <td class="px-4 py-4 text-sm font-medium ">
                                                             <div>
-                                                                <h2 class="font-medium text-gray-800 dark:text-white ">
+                                                                <h2 class="font-medium text-gray-800  ">
                                                                     {{ $data->nama }}
                                                                 </h2>
                                                             </div>
@@ -128,7 +128,7 @@
                                                         <td class="px-4 py-4 text-sm font-medium" colspan="10">
                                                             <div>
                                                                 <h2
-                                                                    class="font-medium flex gap-6 text-gray-800 text-center justify-center dark:text-white ">
+                                                                    class="font-medium flex gap-6 text-gray-800 text-center justify-center  ">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                         viewBox="0 0 24 24" stroke-width="1.5"
                                                                         stroke="currentColor" class="w-6 h-6">

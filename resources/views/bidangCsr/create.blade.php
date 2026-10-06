@@ -10,7 +10,7 @@
                     <section class="container px-4 mx-auto">
                         <div class="w-full flex justify-between mt-6">
                             <div>
-                                <h2 class="text-lg font-medium text-gray-800 dark:text-white flex items-center">
+                                <h2 class="text-lg font-medium text-gray-800  flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.2" stroke="currentColor" class="w-8 h-8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -29,7 +29,7 @@
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block w-full py-2  md:px-6 lg:px-8">
                                     <div
-                                        class="overflow-hidden w-full border border-gray-300 p-3 dark:border-gray-700 md:rounded-lg">
+                                        class="overflow-hidden w-full border border-gray-300 p-3  md:rounded-lg">
 
 
 
@@ -41,32 +41,32 @@
                                             <div class="grid grid-cols-2 gap-6 w-full">
                                                 <div>
                                                     <div class="mb-5">
-                                                        <label for="nama" class="block mb-2 dark:text-white">Nama
+                                                        <label for="nama" class="block mb-2 ">Nama
                                                             Bidang</label>
                                                         <input id="nama" name="nama"
-                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                             required />
                                                     </div>
                                                     {{-- <div class="mb-5">
                                                         <label for="password"
-                                                            class="block mb-2  dark:text-white">Urutan</label>
+                                                            class="block mb-2  ">Urutan</label>
                                                         <input type="number" id="urutan" name="urutan"
-                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                             required />
                                                     </div> --}}
                                                 </div>
                                                 <div>
                                                     <div class="mb-5">
                                                         <label for="password"
-                                                            class="block mb-2  dark:text-white">Deskripsi</label>
+                                                            class="block mb-2  ">Deskripsi</label>
                                                         <textarea id="deskripsi" name="deskripsi" rows="3"
-                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                             required></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                             <button type="submit"
-                                                class="text-white bg-[#00ae73] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-[#00ae73] dark:focus:ring-green-800">Tambah</button>
+                                                class="text-white bg-[#1E40AF] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center   ">Tambah</button>
                                         </form>
 
 

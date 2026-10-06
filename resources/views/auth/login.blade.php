@@ -22,7 +22,7 @@
 <body>
     <div id="app" class="flex h-screen w-screen flex justify-center items-center">
         <div
-            class="flex h-2/3 w-full max-w-sm mx-auto overflow-hidden bg-red-200 bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl drop-shadow-2xl">
+            class="flex h-2/3 w-full max-w-sm mx-auto overflow-hidden bg-red-200 bg-white rounded-lg shadow-lg  lg:max-w-4xl drop-shadow-2xl">
             <div class="hidden bg-cover lg:block lg:w-1/2"
                 style="background-image: url('https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80');">
             </div>
@@ -32,7 +32,7 @@
                     {{-- <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt=""> --}}
                 </div>
 
-                <p class="text-xl text-center text-gray-600 dark:text-gray-200 mb-8">
+                <p class="text-xl text-center text-gray-600  mb-8">
                     SELAMAT DATANG
                 </p>
 
@@ -41,11 +41,11 @@
 
                     <div class="row mb-2 ">
                         <label for="email"
-                            class="block mb-1 text-base font-medium text-gray-600 dark:text-gray-200">{{ __('Alamat Email') }}</label>
+                            class="block mb-1 text-base font-medium text-gray-600 ">{{ __('Alamat Email') }}</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email"
-                                class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 @error('email') is-invalid @enderror"
+                                class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-500 rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300 @error('email') is-invalid @enderror"
                                 name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                             @error('email')
@@ -58,11 +58,11 @@
 
                     <div class="row mb-2">
                         <label for="password"
-                            class="block mb-1 text-base font-medium text-gray-600 dark:text-gray-200">{{ __('Password') }}</label>
+                            class="block mb-1 text-base font-medium text-gray-600 ">{{ __('Password') }}</label>
 
                         <div class="col-md-6">
                             <input id="password" type="password"
-                                class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-500 rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300 @error('password') is-invalid @enderror"
+                                class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-500 rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300 @error('password') is-invalid @enderror"
                                 name="password" required autocomplete="current-password">
 
                             @error('password')
@@ -103,11 +103,11 @@
                 </form>
 
                 {{-- <div class="flex items-center justify-between mt-4">
-                <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+                <span class="w-1/5 border-b  md:w-1/4"></span>
 
-                <a href="#" class="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline">or sign up</a>
+                <a href="#" class="text-xs text-gray-500 uppercase  hover:underline">or sign up</a>
 
-                <span class="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
+                <span class="w-1/5 border-b  md:w-1/4"></span>
             </div> --}}
             </div>
         </div>

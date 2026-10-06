@@ -16,4 +16,8 @@ class Bidangcsr extends Model
             'urut' ,
             'deskripsi' ,
     ];
+
+    public function kegiatan() {
+        return $this->hasMany(Kegiatan::class, 'id_bidang');
+    }
 }

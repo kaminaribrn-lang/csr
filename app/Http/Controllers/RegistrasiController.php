@@ -64,12 +64,15 @@ class RegistrasiController extends Controller
 
         // dd($ubah);
 
-         User::create([
-            'name' => $ubah->nama,
-            'email' => $ubah->email,
-            'role' => 'perusahaan',
-            'password' => $ubah->password,
-        ]);
+         User::updateOrCreate(
+            ['email' => $ubah->email],
+            [
+                'name' => $ubah->nama,
+                'email' => $ubah->email,
+                'role' => 'perusahaan',
+                'password' => $ubah->password,
+            ]
+        );
 
         return redirect('registrasi');
     }

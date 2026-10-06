@@ -10,7 +10,7 @@
                     <section class="container px-4 mx-auto">
                         <div class="w-full flex justify-between mt-6">
                             <div>
-                                <h2 class="text-lg font-medium text-gray-800 dark:text-white flex items-center">
+                                <h2 class="text-lg font-medium text-gray-800  flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.2" stroke="currentColor" class="w-8 h-8">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -29,124 +29,53 @@
                             <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="inline-block w-full py-2  md:px-6 lg:px-8">
                                     <div
-                                        class="overflow-hidden w-full border border-gray-300 p-3 dark:border-gray-700 md:rounded-lg">
+                                        class="overflow-hidden w-full border border-gray-300 p-3  md:rounded-lg">
 
                                         <form action="{{ route('kegiatan.store') }}" method="POST"
                                             enctype="multipart/form-data" class="text-base font-normal w-full ">
 
                                             @csrf
-
-                                            <div class="grid grid-cols-2 gap-x-6 w-full">
-
-                                                <div class="mb-4">
-                                                    <label for="kelurahan"
-                                                        class="block mb-2 dark:text-white capitalize">Bidang</label>
-                                                    <select id="idbidang" name="idbidang" required
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                        @forelse($bidangs as $bidang)
-                                                            <option value="{{ $bidang->id }}">{{ $bidang->nama }}</option>
-                                                        @empty
-                                                        @endforelse
-                                                    </select>
-                                                </div>
-
-                                                <div class="mb-4">
-                                                    <label for="nama" class="block mb-2 dark:text-white">Nama
-                                                        Kegiatan</label>
-                                                    <input id="nama" name="nama"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                        required />
-                                                </div>
-
-                                                <div class="mb-4">
-                                                    <label for="tahun"
-                                                        class="block mb-2 dark:text-white capitalize">tahun</label>
-                                                    <select id="tahun" name="tahun" required
-                                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                        <option value="2021">2021</option>
-                                                        <option value="2022">2022</option>
-                                                        <option value="2023">2023</option>
-                                                        <option value="2024">2024</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="mb-4">
-                                                    <label for="nama" class="block mb-2 dark:text-white">Nominal
-                                                        Pagu</label>
-                                                    <div class="relative ">
-                                                        <div
-                                                            class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                                                            Rp.
-                                                        </div>
-                                                        <input id="nominalpagu" name="nominalpagu" type=""
-                                                            onkeypress="return hanyaAngka(event)"
-                                                            class="bg-gray-50 border text-right border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                            required />
-
+                                            <div class="space-y-5 w-full">
+                                                @if (\Auth::user()->role == 'superadmin')
+                                                    <div class="mb-4">
+                                                        <label for="perusahaan"
+                                                            class="block mb-2  capitalize">Perusahaan</label>
+                                                        <select id="perusahaan" name="perusahaan" required
+                                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      ">
+                                                            @forelse($perusahaan as $item)
+                                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                            @empty
+                                                            @endforelse
+                                                        </select>
                                                     </div>
-                                                </div>
+                                                @elseif($company)
+                                                    <div class="mb-4">
+                                                        <label class="block mb-2  capitalize">Perusahaan</label>
+                                                        <input value="{{ $company->nama }}" disabled
+                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full p-2.5   " />
+                                                    </div>
+                                                @endif
 
                                                 <div class="mb-4">
-                                                    <label for="" class="block mb-2 dark:text-white capitalize">nama
-                                                        perusahaan</label>
-                                                    <input id="idperusahaan" name="idperusahaan"
-                                                        value="{{ \Auth::user()->id }}" class="hidden" required />
-                                                    <input id="" name="" value="{{ \Auth::user()->name }}"
-                                                        disabled
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                    <label for="nama" class="block mb-2 ">Nama Kegiatan</label>
+                                                    <input id="nama" name="nama"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                         required />
                                                 </div>
 
                                                 <div class="mb-4">
-                                                    <label for="output"
-                                                        class="block mb-2 dark:text-white capitalize">output</label>
-                                                    <input id="output" name="output"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                        required />
+                                                    <label for="deskripsi" class="block mb-2  capitalize">Uraian Kegiatan</label>
+                                                    <textarea id="deskripsi" name="deskripsi" rows="5"
+                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
+                                                        required></textarea>
                                                 </div>
 
-                                                <div class="mb-4">
-                                                    <label for="deskripsi"
-                                                        class="block mb-2 dark:text-white capitalize">deskripsi</label>
-                                                    <input id="deskripsi" name="deskripsi"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                        required />
+                                                <div class="rounded-lg border border-blue-100 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+                                                    Detail pelaksanaan tidak diisi di form kegiatan. Setelah kegiatan disimpan, rincian tindakan dimasukkan melalui menu aksi di halaman detail kegiatan.
                                                 </div>
-
-                                                <div class="mb-4">
-                                                    <label for="lokasi"
-                                                        class="block mb-2 dark:text-white capitalize">lokasi</label>
-                                                    <input id="lokasi" name="lokasi"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                        required />
-                                                </div>
-
-                                                <div class="mb-4">
-                                                    <label for="catatan"
-                                                        class="block mb-2 dark:text-white capitalize">catatan</label>
-                                                    <input id="catatan" name="catatan"
-                                                        class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                        required />
-                                                </div>
-
-                                                <div class="mb-4">
-                                                    <label for="lampiran"
-                                                        class="block mb-2 dark:text-white capitalize">lampiran</label>
-                                                    <input id="lampiran" name="lampiran" type="file"
-                                                        class="bg-gray-50 border border-white text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                        required />
-                                                </div>
-                                                {{-- <div class="mb-4">
-                                                        <label for="password"
-                                                            class="block mb-2  dark:text-white">Urutan</label>
-                                                        <input type="number" id="urutan" name="urutan"
-                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
-                                                            required />
-                                                    </div> --}}
-
                                             </div>
                                             <button type="submit"
-                                                class="text-white bg-[#00ae73] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-[#00ae73] dark:focus:ring-green-800">Tambah</button>
+                                                class="text-white bg-[#1E40AF] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center   ">Tambah</button>
                                         </form>
 
 
@@ -160,37 +89,4 @@
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        /* Dengan Rupiah */
-        var dengan_rupiah = document.getElementById('nominalpagu');
-        dengan_rupiah.addEventListener('keyup', function(e) {
-            dengan_rupiah.value = formatRupiah(this.value, '');
-        });
-
-        /* Fungsi */
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.replace(/[^,\d]/g, '').toString(),
-                split = number_string.split(','),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            if (ribuan) {
-                separator = sisa ? '.' : '';
-                rupiah += separator + ribuan.join('.');
-            }
-
-            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-            return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
-        }
-
-        function hanyaAngka(evt) {
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode > 31 && (charCode < 48 || charCode > 57))
-
-                return false;
-            return true;
-        }
-    </script>
 @endsection

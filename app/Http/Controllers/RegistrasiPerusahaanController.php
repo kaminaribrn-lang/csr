@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
+use App\Models\Registrasiperusahaan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RegistrasiPerusahaanController extends Controller
 {
@@ -29,6 +32,9 @@ class RegistrasiPerusahaanController extends Controller
      */
     public function store(Request $request)
     {
+        $email = $this->generateCompanyEmail($request->nama);
+        $defaultPassword = bcrypt('password');
+
         $tambah = Perusahaan::create([
             'nama' => $request->nama,
             'direktur' => $request->direktur,
@@ -39,11 +45,12 @@ class RegistrasiPerusahaanController extends Controller
             'website' => $request->website,
             'nomorhp' => $request->nomorhp,
             'status' => 'registrasi',
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'email' => $email,
+            'password' => $defaultPassword,
             ]);
 
         if ($tambah) {
+            $this->syncCompanyUser($tambah);
             return redirect('/');
         }
     }
@@ -78,5 +85,29 @@ class RegistrasiPerusahaanController extends Controller
     public function destroy(Registrasiperusahaan $registrasiperusahaan)
     {
         //
+    }
+
+    private function generateCompanyEmail(string $companyName): string
+    {
+        $normalizedName = Str::of($companyName)
+            ->lower()
+            ->replaceMatches('/\b(pt|cv)\b\.?/i', '')
+            ->replaceMatches('/[^a-z0-9]+/i', '')
+            ->trim();
+
+        return ($normalizedName->isNotEmpty() ? $normalizedName : 'perusahaan') . '@gmail.com';
+    }
+
+    private function syncCompanyUser(Perusahaan $company): void
+    {
+        User::updateOrCreate(
+            ['email' => $company->email],
+            [
+                'name' => $company->nama,
+                'email' => $company->email,
+                'role' => 'perusahaan',
+                'password' => $company->password,
+            ]
+        );
     }
 }

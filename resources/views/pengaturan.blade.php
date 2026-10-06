@@ -7,7 +7,7 @@
         <div class="row justify-content-center px-4">
             <div class="w-full flex justify-between mt-6">
                 <div>
-                    <h2 class="text-lg font-medium text-gray-800 dark:text-white flex items-center">
+                    <h2 class="text-lg font-medium text-gray-800  flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-8 h-8">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -24,7 +24,7 @@
             <div class="grid grid-cols-3 gap-4 mt-3">
                 <a href="/pengaturan/slider"
                     class="cursor-pointer {{ \Auth::user()->role == 'superadmin' ? '' : ' hidden' }}">
-                    <div class="p-5 flex  rounded-3xl bg-[#00ae73] w-full justify-center items-center  ">
+                    <div class="p-5 flex  rounded-3xl bg-[#1E40AF] w-full justify-center items-center  ">
                         <p class="text-xl uppercase text-white text-center font-semibold drop-shadow ">
                             SLIDER
                         </p>
@@ -32,7 +32,7 @@
                 </a>
                 <a href="/pengaturan/tentang-csr"
                     class="cursor-pointer {{ \Auth::user()->role == 'superadmin' ? '' : ' hidden' }}">
-                    <div class="p-5 flex  rounded-3xl bg-[#00ae73] w-full justify-center items-center  ">
+                    <div class="p-5 flex  rounded-3xl bg-[#1E40AF] w-full justify-center items-center  ">
                         <p class="text-xl uppercase text-white text-center font-semibold drop-shadow ">
                             TENTANG CSR
                         </p>
@@ -40,14 +40,14 @@
                 </a>
                 <a href="/pengaturan/dasar-hukum"
                     class="cursor-pointer {{ \Auth::user()->role == 'superadmin' ? '' : ' hidden' }}">
-                    <div class="p-5 flex  rounded-3xl bg-[#00ae73] w-full justify-center items-center  ">
+                    <div class="p-5 flex  rounded-3xl bg-[#1E40AF] w-full justify-center items-center  ">
                         <p class="text-xl uppercase text-white text-center font-semibold drop-shadow ">
                             DASAR HUKUM
                         </p>
                     </div>
                 </a>
                 <a href="/pengaturan/kata-sandi" class="cursor-pointer">
-                    <div class="p-5 flex  rounded-3xl bg-[#00ae73] w-full justify-center items-center  ">
+                    <div class="p-5 flex  rounded-3xl bg-[#1E40AF] w-full justify-center items-center  ">
                         <p class="text-xl uppercase text-white text-center font-semibold drop-shadow ">
                             KATA SANDI
                         </p>

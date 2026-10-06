@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Aksi;
 use App\Models\Kegiatan;
 use App\Models\Bidangcsr;
+use App\Models\Perusahaan;
+use App\Models\ProgramUnggulanBupati;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class KegiatanController extends Controller
 {
@@ -13,24 +18,18 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        if(\Auth::user()->role == "superadmin"){
-            $datas = Kegiatan::
-                join('perusahaan','kegiatan.idperusahaan','=','perusahaan.id')
-                ->join('bidangcsr','kegiatan.idbidang','=','bidangcsr.id')
-                ->select('kegiatan.*','perusahaan.nama as namaPerusahaan','bidangcsr.nama as namaBidang')
-                ->get();
+        $datas = Kegiatan::leftJoin('perusahaan', 'kegiatan.idperusahaan', '=', 'perusahaan.id')
+            ->leftJoin('bidangcsr', 'kegiatan.idbidang', '=', 'bidangcsr.id')
+            ->select('kegiatan.*', 'perusahaan.nama as namaPerusahaan', 'bidangcsr.nama as namaBidang');
 
-            return view('kegiatan.indexAdmin', compact('datas'));
-
-        } else if(\Auth::user()->role == "perusahaan"){
-            $datas = Kegiatan::
-                join('perusahaan','kegiatan.idperusahaan','=','perusahaan.id')
-                ->join('bidangcsr','kegiatan.idbidang','=','bidangcsr.id')
-                ->select('kegiatan.*','perusahaan.nama as namaPerusahaan','bidangcsr.nama as namaBidang')
-                ->where('idperusahaan','=',\Auth::user()->id)->get();
-
-            return view('kegiatan.indexAdmin', compact('datas'));
+        if (auth()->check() && auth()->user()->role === 'perusahaan') {
+            $company = $this->resolveCurrentCompany();
+            $datas->where('kegiatan.idperusahaan', $company->id);
         }
+
+        $datas = $datas->get();
+
+        return view('kegiatan.indexAdmin', compact('datas'));
     }
 
     /**
@@ -38,9 +37,15 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        $bidangs = Bidangcsr::get();
+        $perusahaan = auth()->check() && auth()->user()->role === 'superadmin'
+            ? Perusahaan::where('status', '=', 'diterima')->get()
+            : collect();
 
-        return view('kegiatan.create', compact('bidangs'));
+        $company = auth()->check() && auth()->user()->role === 'perusahaan'
+            ? $this->resolveCurrentCompany()
+            : null;
+
+        return view('kegiatan.create', compact('perusahaan', 'company'));
     }
 
     /**
@@ -48,26 +53,28 @@ class KegiatanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->post());
-        $nominal = (float) str_replace(['.', ','], ['', '.'], $request->nominalpagu);
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'perusahaan' => auth()->check() && auth()->user()->role === 'superadmin' ? 'required' : 'nullable',
+        ]);
 
-        $file = $request->lampiran;
-
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $request->lampiran->move('lampiran', $filename);
+        $companyId = auth()->check() && auth()->user()->role === 'perusahaan'
+            ? $this->resolveCurrentCompany()->id
+            : $validated['perusahaan'];
 
         Kegiatan::create([
-            'nama' => $request->nama,
-            'nominalpagu' => $nominal,
-            'idbidang' => $request->idbidang,
-            'idperusahaan' => $request->idperusahaan,
-            'output' => $request->output,
-            'deskripsi' => $request->deskripsi,
+            'nama' => $validated['nama'],
+            'nominalpagu' => 0,
+            'idbidang' => '0',
+            'idperusahaan' => $companyId,
+            'output' => $validated['nama'],
+            'deskripsi' => $validated['deskripsi'],
             'status' => 'tayang',
-            'lokasi' => $request->lokasi,
-            'tahun' => $request->tahun,
-            'catatan' => $request->catatan,
-            'lampiran' => $filename,
+            'lokasi' => '-',
+            'tahun' => (string) now()->year,
+            'catatan' => '-',
+            'lampiran' => '',
         ]);
 
         return redirect('/kegiatan');
@@ -78,7 +85,7 @@ class KegiatanController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return redirect('kegiatan');
     }
 
     /**
@@ -86,12 +93,63 @@ class KegiatanController extends Controller
      */
     public function edit(Kegiatan $kegiatan)
     {
-        $data = Kegiatan::join('perusahaan','kegiatan.idperusahaan','=','perusahaan.id')
-        ->select('kegiatan.*','perusahaan.nama as namaPerusahaan')->get();
-        $data = $data[0];
-        $bidangs = Bidangcsr::get();
-        // dd($data);
-        return view('kegiatan.edit', compact('data', 'bidangs'));
+        $this->authorizeCompanyKegiatan($kegiatan);
+
+        $data = Kegiatan::leftJoin('perusahaan', 'kegiatan.idperusahaan', '=', 'perusahaan.id')
+            ->leftJoin('bidangcsr', 'kegiatan.idbidang', '=', 'bidangcsr.id')
+            ->select('kegiatan.*', 'perusahaan.nama as namaPerusahaan', 'bidangcsr.nama as namaBidang')
+            ->where('kegiatan.id', $kegiatan['id'])
+            ->firstOrFail();
+
+        $programOptions = ProgramUnggulanBupati::with(['uraians' => function ($query) {
+            $query->select('id', 'program_unggulan_bupati_id', 'uraian')->orderBy('id');
+        }])
+            ->orderBy('nama')
+            ->get(['id', 'nama'])
+            ->map(function ($program) {
+                return [
+                    'id' => $program->id,
+                    'nama' => $program->nama,
+                    'uraians' => $program->uraians->map(function ($uraian) {
+                        return [
+                            'id' => $uraian->id,
+                            'uraian' => $uraian->uraian,
+                        ];
+                    })->values(),
+                ];
+            })
+            ->values();
+
+        $wilayahRows = collect();
+
+        if (Schema::hasTable('wilayah_mahakam_ulu')) {
+            $wilayahRows = DB::table('wilayah_mahakam_ulu')
+                ->select('kecamatan', 'desa as kelurahan')
+                ->orderBy('kecamatan')
+                ->orderBy('desa')
+                ->get();
+        }
+
+        if ($wilayahRows->isEmpty()) {
+            $wilayahRows = Perusahaan::query()
+                ->select('kecamatan', 'kelurahan')
+                ->whereNotNull('kecamatan')
+                ->where('kecamatan', '!=', '')
+                ->whereNotNull('kelurahan')
+                ->where('kelurahan', '!=', '')
+                ->orderBy('kecamatan')
+                ->orderBy('kelurahan')
+                ->get();
+        }
+
+        $wilayahOptions = $wilayahRows
+            ->groupBy('kecamatan')
+            ->map(function ($rows) {
+                return $rows->pluck('kelurahan')->unique()->values();
+            })
+            ->toArray();
+
+        return view('kegiatan.edit', compact('data', 'programOptions', 'wilayahOptions'));
     }
 
     /**
@@ -99,27 +157,26 @@ class KegiatanController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $nominal = (float) str_replace(['.', ','], ['', '.'], $request->nominalpagu);
-
-        // $file = $request->lampiran;
-
-        // $filename = time() . '.' . $file->getClientOriginalExtension();
-        // $request->lampiran->move('lampiran', $filename);
+        $validated = $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'status' => 'nullable|string',
+        ]);
 
         $ubah = Kegiatan::findOrFail($id);
-        $ubah->update([
-             'nama' => $request->nama,
-            'nominalpagu' => $nominal,
-            'idbidang' => $request->idbidang,
-            'idperusahaan' => $request->idperusahaan,
-            'output' => $request->output,
-            'deskripsi' => $request->deskripsi,
-            'status' => $request->status,
-            'lokasi' => $request->lokasi,
-            'tahun' => $request->tahun,
-            'catatan' => $request->catatan,
-            // 'lampiran' => $filename,
-        ]);
+        $this->authorizeCompanyKegiatan($ubah);
+
+        $payload = [
+            'nama' => $validated['nama'],
+            'output' => $validated['nama'],
+            'deskripsi' => $validated['deskripsi'],
+        ];
+
+        if (auth()->check() && auth()->user()->role === 'superadmin' && $request->filled('status')) {
+            $payload['status'] = $validated['status'];
+        }
+
+        $ubah->update($payload);
 
         return redirect('kegiatan');
 
@@ -130,6 +187,40 @@ class KegiatanController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $kegiatan = Kegiatan::findOrFail($id);
+        $this->authorizeCompanyKegiatan($kegiatan);
+        $kegiatan->delete();
+
+        return redirect('kegiatan');
+    }
+
+    public function recalculate($id)
+    {
+        $kegiatan = Kegiatan::findOrFail($id);
+        $this->authorizeCompanyKegiatan($kegiatan);
+
+        $total = Aksi::where('id_kegiatan', $id)->sum('nominalpagu');
+
+        $kegiatan->update([
+            'nominalpagu' => $total,
+        ]);
+
+        return response()->json([
+            'nominal' => $total,
+        ]);
+    }
+
+    private function resolveCurrentCompany(): Perusahaan
+    {
+        return Perusahaan::where('email', auth()->user()->email)->firstOrFail();
+    }
+
+    private function authorizeCompanyKegiatan(Kegiatan $kegiatan): void
+    {
+        if (auth()->check() && auth()->user()->role === 'perusahaan') {
+            $company = $this->resolveCurrentCompany();
+
+            abort_if((string) $kegiatan->idperusahaan !== (string) $company->id, 403);
+        }
     }
 }

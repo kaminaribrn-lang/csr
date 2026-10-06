@@ -25,4 +25,10 @@ class Perusahaan extends Model
             'email' ,
             'password' ,
     ];
+
+    public function kegiatans()
+    {
+        // Pastikan 'id_perusahaan' adalah nama kolom foreign key di tabel kegiatan
+        return $this->hasMany(Kegiatan::class, 'idperusahaan');
+    }
 }

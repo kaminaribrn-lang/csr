@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Perusahaan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use PHPUnit\Framework\MockObject\Stub\ReturnReference;
 
 class PerusahaanController extends Controller
@@ -32,6 +34,9 @@ class PerusahaanController extends Controller
      */
     public function store(Request $request)
     {
+        $email = $this->generateCompanyEmail($request->nama);
+        $defaultPassword = bcrypt('password');
+
         $tambah = Perusahaan::create([
             'nama' => $request->nama,
             'direktur' => $request->direktur,
@@ -42,11 +47,12 @@ class PerusahaanController extends Controller
             'website' => $request->website,
             'nomorhp' => $request->nomorhp,
             'status' => 'diterima',
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'email' => $email,
+            'password' => $defaultPassword,
             ]);
 
         if ($tambah) {
+            $this->syncCompanyUser($tambah);
             return redirect('/perusahaan');
         }
     }
@@ -75,6 +81,9 @@ class PerusahaanController extends Controller
     {
         // dd($request->post() );
         $ubah = Perusahaan::findOrFail($id);
+        $originalEmail = $ubah->email;
+        $email = $this->generateCompanyEmail($request->nama);
+        $defaultPassword = bcrypt('password');
 
         if($request->password == null){
             $ubah->update([
@@ -86,7 +95,8 @@ class PerusahaanController extends Controller
                 'kodepos' => $request->kodepos,
                 'website' => $request->website,
                 'nomorhp' => $request->nomorhp,
-                'email' => $request->email,
+                'email' => $email,
+                'password' => $defaultPassword,
             ]);
         } else {
             $ubah->update([
@@ -98,10 +108,12 @@ class PerusahaanController extends Controller
                 'kodepos' => $request->kodepos,
                 'website' => $request->website,
                 'nomorhp' => $request->nomorhp,
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
+                'email' => $email,
+                'password' => $defaultPassword,
             ]);
         }
+
+        $this->syncCompanyUser($ubah, $originalEmail);
 
         return redirect('perusahaan');
     }
@@ -113,5 +125,31 @@ class PerusahaanController extends Controller
     {
         $perusahaan->delete();
         return redirect('perusahaan');
+    }
+
+    private function generateCompanyEmail(string $companyName): string
+    {
+        $normalizedName = Str::of($companyName)
+            ->lower()
+            ->replaceMatches('/\b(pt|cv)\b\.?/i', '')
+            ->replaceMatches('/[^a-z0-9]+/i', '')
+            ->trim();
+
+        return ($normalizedName->isNotEmpty() ? $normalizedName : 'perusahaan') . '@gmail.com';
+    }
+
+    private function syncCompanyUser(Perusahaan $company, ?string $originalEmail = null): void
+    {
+        $lookupEmail = $originalEmail ?: $company->email;
+
+        User::updateOrCreate(
+            ['email' => $lookupEmail],
+            [
+                'name' => $company->nama,
+                'email' => $company->email,
+                'role' => 'perusahaan',
+                'password' => $company->password,
+            ]
+        );
     }
 }

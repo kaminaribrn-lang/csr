@@ -33,7 +33,7 @@ $i = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         @include('navbar');
         <div id="beranda" class="h-10 "></div>
         <div class="h-screen">
-            <p class="text-2xl text-[#00ae73] mb-2 font-medium ">Daftar Perusahaan</p>
+            <p class="text-2xl text-[#1E40AF] mb-2 font-medium ">Daftar Perusahaan</p>
             <form action="{{ route('registrasi-perusahaan.store') }}" method="POST" enctype="multipart/form-data"
                 class="text-base font-normal w-full ">
 
@@ -42,89 +42,89 @@ $i = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
                 <div class="grid grid-cols-2 gap-x-6 w-full">
 
                     <div class="mb-2">
-                        <label for="nama" class="block mb-2 dark:text-white">Nama
+                        <label for="nama" class="block mb-2 ">Nama
                             Perusahaan</label>
                         <input id="nama" name="nama"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="nama" class="block mb-2 dark:text-white">Nama
+                        <label for="nama" class="block mb-2 ">Nama
                             Direktur</label>
                         <input id="direktur" name="direktur"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="kecamatan" class="block mb-2 dark:text-white capitalize">kecamatan</label>
+                        <label for="kecamatan" class="block mb-2  capitalize">kecamatan</label>
                         <input id="kecamatan" name="kecamatan"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="kelurahan" class="block mb-2 dark:text-white capitalize">kelurahan</label>
+                        <label for="kelurahan" class="block mb-2  capitalize">kelurahan</label>
                         <input id="kelurahan" name="kelurahan"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="alamat" class="block mb-2 dark:text-white capitalize">alamat</label>
+                        <label for="alamat" class="block mb-2  capitalize">alamat</label>
                         <input id="alamat" name="alamat"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="kodepos" class="block mb-2 dark:text-white capitalize">kode
+                        <label for="kodepos" class="block mb-2  capitalize">kode
                             pos</label>
                         <input id="kodepos" name="kodepos"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="website" class="block mb-2 dark:text-white capitalize">website</label>
+                        <label for="website" class="block mb-2  capitalize">website</label>
                         <input id="website" name="website"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="nomorhp" class="block mb-2 dark:text-white capitalize">no
+                        <label for="nomorhp" class="block mb-2  capitalize">no
                             hp</label>
                         <input id="nomorhp" name="nomorhp"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="email" class="block mb-2 dark:text-white capitalize">email</label>
+                        <label for="email" class="block mb-2  capitalize">email</label>
                         <input id="email" name="email"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
 
                     <div class="mb-2">
-                        <label for="password" class="block mb-2 dark:text-white capitalize">password</label>
+                        <label for="password" class="block mb-2  capitalize">password</label>
                         <input id="password" name="password"
-                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                             required />
                     </div>
                     {{-- <div class="mb-2">
                                                         <label for="password"
-                                                            class="block mb-2  dark:text-white">Urutan</label>
+                                                            class="block mb-2  ">Urutan</label>
                                                         <input type="number" id="urutan" name="urutan"
-                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                                                            class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5      "
                                                             required />
                                                     </div> --}}
 
                 </div>
                 <button type="submit"
-                    class="text-white bg-[#00ae73] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xl w-full  px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-[#00ae73] dark:focus:ring-green-800">DAFTAR</button>
+                    class="text-white bg-[#1E40AF] w-full hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-xl w-full  px-5 py-2.5 text-center   ">DAFTAR</button>
             </form>
 
         </div>
